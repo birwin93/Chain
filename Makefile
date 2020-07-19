@@ -10,8 +10,8 @@ endef
 .PHONY: build clean
 
 setup:
-	brew_install mint
-	brew_install danger-swift
+	$(call brew_install mint)
+	$(call brew_install danger-swift)
 	mint bootstrap
 
 build:
