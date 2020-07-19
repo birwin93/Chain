@@ -7,4 +7,10 @@
 
 import Foundation
 
-// adding a file to trigger danger warning
+class Blah {
+    
+    func lintThis() {
+        let url = URL(string: "http://blah.com")!
+        print(url.path)
+    }
+}
