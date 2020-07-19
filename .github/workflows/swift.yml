@@ -2,6 +2,7 @@ name: Swift
 
 env:
   MINT_PATH: ${{ github.workspace }}/mint
+  SWIFLINT_PATH: ${{ github.workspace }}/swiftlint
 
 on:
   push:
@@ -18,18 +19,23 @@ jobs:
     - name: Checkout 
       uses: actions/checkout@v2
 
+    - name: Cache Mint
+      uses: actions/cache@v1
+      with:
+        key: ${{ runner.os }}-mint
+        path: ${{ env.MINT_PATH }}
+
     - name: Cache Mint packages
       uses: actions/cache@v1
       with:
         path: ${{ env.MINT_PATH }}
-        key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
-        restore-keys: ${{ runner.os }}-mint-
+        key: ${{ runner.os }}-mint-dependencies-${{ hashFiles('**/Mintfile') }}
 
     - name: Bootstrap
       run: make setup
 
     - name: Swiflint
-      run: swiftlint
+      run: mint run swiftlint
 
     - name: Build
       run: swift build -v
