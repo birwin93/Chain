@@ -10,7 +10,7 @@ import Foundation
 import XCTest
 
 class TestFile: File {
-    
+
     let currentPath: CurrentPath
 
     var files: [String: String] = [:]

@@ -8,9 +8,9 @@
 import Foundation
 
 public protocol File {
-    
+
     var currentPath: CurrentPath { get }
-    
+
     // MARK: - File Management
 
     func fileExists(at path: String) -> Bool
@@ -29,7 +29,7 @@ public protocol File {
 // MARK: - Helpers
 
 extension File {
-    
+
     public func fullPath(_ path: String) -> String {
         return currentPath.url.appendingPathComponent(path).path
     }
@@ -38,7 +38,7 @@ extension File {
 // MARK: - FileClient
 
 public class FileClient: File {
-    
+
     private let fileManager: FileManager
     public let currentPath: CurrentPath
 

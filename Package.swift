@@ -11,14 +11,15 @@ let package = Package(
         .library(name: "Chains", targets: ["Chains"])
     ],
     dependencies: [
-        // External
+        .package(url: "https://github.com/yonaskolb/Mint.git", from: "0.10.0"),
         .package(url: "https://github.com/apple/swift-argument-parser", from: "0.2.0"),
     ],
     targets: [
         .target(
             name: "ChainCore",
             dependencies: [
-                .product(name: "ArgumentParser", package: "swift-argument-parser")
+                .product(name: "ArgumentParser", package: "swift-argument-parser"),
+                "MintKit"
             ]
         ),
         .target(

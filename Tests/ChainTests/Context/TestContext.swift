@@ -9,7 +9,7 @@
 import Foundation
 
 class TestContext: Context {
-    
+
     let currentPath = CurrentPath()
 
     let testFile: TestFile
@@ -25,7 +25,7 @@ class TestContext: Context {
     var file: File {
         return testFile
     }
-    
+
     var shell: Shell {
         return testShell
     }
