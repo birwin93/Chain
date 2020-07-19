@@ -41,8 +41,8 @@ jobs:
     - name: Bootstrap
       run: make setup
 
-    - name: Check Stuff
-      run: which swiflint
+    - name: See Things
+      run: mint which swiftlint
 
     - name: Danger
       if: ${{ github.event_name == 'pull_request' }}

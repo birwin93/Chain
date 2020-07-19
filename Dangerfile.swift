@@ -11,5 +11,5 @@ SwiftLint.lint(
     configFile: ".swiftlint.yml",
     strict: true,
     quiet: false,
-    swiftlintPath: "swiftlint"
+    swiftlintPath: danger.utils.exec("mint which swiftlint")
 )
