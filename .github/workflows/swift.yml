@@ -1,5 +1,8 @@
 name: Swift
 
+env:
+  MINT_PATH: ${{ github.workspace }}/mint
+
 on:
   push:
     branches: [ master ]
@@ -14,11 +17,22 @@ jobs:
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
+
+    - name: Cache Mint packages
+      uses: actions/cache@v1
+      with:
+        path: ${{ env.MINT_PATH }}
+        key: ${{ runner.os }}-mint-${{ hashFiles('**/Mintfile') }}
+        restore-keys: ${{ runner.os }}-mint-
+
     - name: Bootstrap
       run: make setup
+
     - name: Swiflint
       run: swiftlint
+
     - name: Build
       run: swift build -v
+      
     - name: Run tests
       run: swift test -v
