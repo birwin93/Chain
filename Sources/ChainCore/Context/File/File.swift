@@ -9,6 +9,8 @@ import Foundation
 
 public protocol File {
     
+    var currentPath: CurrentPath { get }
+    
     // MARK: - File Management
 
     func fileExists(at path: String) -> Bool
@@ -24,12 +26,21 @@ public protocol File {
     func createDirectory(path: String) throws
 }
 
+// MARK: - Helpers
+
+extension File {
+    
+    public func fullPath(_ path: String) -> String {
+        return currentPath.url.appendingPathComponent(path).path
+    }
+}
+
 // MARK: - FileClient
 
 public class FileClient: File {
     
     private let fileManager: FileManager
-    private let currentPath: CurrentPath
+    public let currentPath: CurrentPath
 
     public init(fileManager: FileManager = .default,
                 currentPath: CurrentPath) {
@@ -98,12 +109,6 @@ public class FileClient: File {
             withIntermediateDirectories: true,
             attributes: nil
         )
-    }
-    
-    // MARK: - Path Helper
-    
-    private func fullPath(_ path: String) -> String {
-        return currentPath.url.appendingPathComponent(path).path
     }
 }
 
