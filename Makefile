@@ -15,8 +15,8 @@ setup:
 	brew list mint ||  brew install mint || true
 	brew link mint
 
-	brew list danger-swift ||  brew install danger/tap/danger-swift || true
-	brew link danger-swift
+	brew list danger/tap/danger-swift ||  brew install danger/tap/danger-swift || true
+	brew link danger/tap/danger-swift
 
 	mint bootstrap
 

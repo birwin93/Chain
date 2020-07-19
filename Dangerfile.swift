@@ -8,8 +8,8 @@ if danger.git.createdFiles.count > 1 {
 SwiftLint.lint(
     .modifiedAndCreatedFiles(directory: nil),
     inline: true,
-    configFile: nil,
+    configFile: ".swiftlint.yml",
     strict: true,
     quiet: false,
-    swiftlintPath: nil
+    swiftlintPath: "swiftlint"
 )
