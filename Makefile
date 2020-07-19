@@ -4,6 +4,11 @@ PROJECT_FILE = $(PRODUCT_NAME).xcodeproj
 
 .PHONY: build clean
 
+setup:
+	brew upgrade mint ||  brew install mint || true
+	brew link mint
+	mint bootstrap
+
 build:
 	swift build
 

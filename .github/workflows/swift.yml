@@ -14,8 +14,8 @@ jobs:
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
-    - name: Mint
-      run: mint bootstrap
+    - name: Bootstrap
+      run: make setup
     - name: Swiflint
       run: swiftlint
     - name: Build
