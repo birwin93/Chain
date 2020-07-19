@@ -6,24 +6,25 @@
 //
 
 import Foundation
+import Logging
 
 public class ChainContext: Context {
 
     var currentPath = CurrentPath()
 
     public let file: File
+    public let logger: Logger
     public let shell: Shell
 
     public init() {
-
-        let url = URL(string: "http://blah.com")!
-        print(url.path)
 
         let shell = ShellClient()
         shell.currentPath = currentPath
 
         self.file = FileClient(currentPath: currentPath)
         self.shell = shell
+        
+        self.logger = Logger(label: "com.chain.logger")
     }
 }
 
@@ -50,7 +51,5 @@ public class CurrentPath {
         } else {
             url = url.appendingPathComponent(path)
         }
-
-        print("Updated path to \(url.path)")
     }
 }

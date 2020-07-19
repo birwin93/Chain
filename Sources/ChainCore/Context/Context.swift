@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import Logging
 
 public protocol Context {
     var file: File { get }
     var shell: Shell { get }
+    var logger: Logger { get }
 }

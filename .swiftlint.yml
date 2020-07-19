@@ -10,3 +10,4 @@ opt_in_rules:
 custom_rules:
   no_prints:
     regex: "\\s+print\\("
+    message: "Please use context.logger instead of print"
