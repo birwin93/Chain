@@ -17,7 +17,7 @@ public class ChainContext: Context {
     public let shell: Shell
 
     public init() {
-        self.logger = Logger(label: "com.chain.logger")
+        self.logger = Logger()
         self.file = FileClient(currentPath: currentPath)
         self.shell = ShellClient(currentPath: currentPath, logger: logger)
     }

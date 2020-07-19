@@ -38,7 +38,15 @@ public class ShellClient: Shell {
     // MARK: - Swift
 
     public func createSwiftPackage() throws {
-        try shell("swift package init")
+        let output = try shell("swift package init")
+        logger.info("\(output)")
+    }
+
+    // MARK: - Mint
+
+    public func mintBootstrap() throws {
+        let output = try shell("mint bootstrap")
+        logger.info("\(output)")
     }
 
     // MARK: - Process

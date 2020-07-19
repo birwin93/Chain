@@ -24,6 +24,6 @@ class CreatePackageChainTests: XCTestCase {
         chain.testRun(context: context)
         context.testFile.assertContents("", at: "./test-package/Package.swift")
         context.testFile.assertContents("", at: "./test-package/Sources/test-package/main.swift")
-        context.testFile.assertContents("wow", at: "./test-package/Blah.swift")
+        context.testFile.assertContents("realm/swiftlint@0.39.2", at: "./test-package/Mintfile")
     }
 }
