@@ -5,8 +5,9 @@
 //  Created by Billy Irwin on 7/18/20.
 //
 
-@testable import ChainCore
+import ChainCore
 import Foundation
+import Logging
 
 class TestContext: Context {
 
@@ -16,8 +17,9 @@ class TestContext: Context {
     let testShell: TestShell
 
     init() {
+        self.logger = Logger(label: "com.chain.test.logger")
         self.testFile = TestFile(currentPath: currentPath)
-        self.testShell = TestShell(testFile: testFile, currentPath: currentPath)
+        self.testShell = TestShell(testFile: testFile, currentPath: currentPath, logger: logger)
     }
 
     // MARK: - Context
@@ -29,4 +31,6 @@ class TestContext: Context {
     var shell: Shell {
         return testShell
     }
+
+    let logger: Logger
 }

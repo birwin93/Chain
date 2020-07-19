@@ -17,14 +17,9 @@ public class ChainContext: Context {
     public let shell: Shell
 
     public init() {
-
-        let shell = ShellClient()
-        shell.currentPath = currentPath
-
-        self.file = FileClient(currentPath: currentPath)
-        self.shell = shell
-        
         self.logger = Logger(label: "com.chain.logger")
+        self.file = FileClient(currentPath: currentPath)
+        self.shell = ShellClient(currentPath: currentPath, logger: logger)
     }
 }
 
@@ -39,6 +34,9 @@ public class ChainContext: Context {
 /// ```
 public class CurrentPath {
 
+    public init() {}
+
+    // swiftlint:disable:next force_unwrapping
     public var url: URL = URL(string: ".")!
 
     public var path: String {
@@ -47,6 +45,7 @@ public class CurrentPath {
 
     public func cd(_ path: String) {
         if path.starts(with: "/") {
+            // swiftlint:disable:next force_unwrapping
             url = URL(string: path)!
         } else {
             url = url.appendingPathComponent(path)
