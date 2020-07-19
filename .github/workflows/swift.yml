@@ -12,7 +12,12 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout 
+      uses: actions/checkout@v2
+    - name: Swiftlint
+      uses: norio-nomura/action-swiftlint@3.1.0
+      env:
+          DIFF_BASE: ${{ github.base_ref }}
     - name: Build
       run: swift build -v
     - name: Run tests
