@@ -1,7 +1,7 @@
 name: Swift
 
 env:
-  DANGER_SWIFT: ${{ github.workspace }}/danger-swift
+  DANGER_SWIFT_PATH: ${{ github.workspace }}/danger-swift
   MINT_PATH: ${{ github.workspace }}/mint
   SWIFLINT_PATH: ${{ github.workspace }}/swiftlint
 
