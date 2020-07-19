@@ -1,6 +1,7 @@
 name: Swift
 
 env:
+  DANGER_SWIFT_PATH: ${{ github.workspace }}/danger-swift
   MINT_PATH: ${{ github.workspace }}/mint
   SWIFLINT_PATH: ${{ github.workspace }}/swiftlint
 
@@ -25,6 +26,12 @@ jobs:
         key: ${{ runner.os }}-mint
         path: ${{ env.MINT_PATH }}
 
+    - name: Cache Danger Swift
+      uses: actions/cache@v1
+      with:
+        key: ${{ runner.os }}-danger-swift
+        path: ${{ env.DANGER_SWIFT_PATH }}
+
     - name: Cache Mint packages
       uses: actions/cache@v1
       with:
@@ -34,8 +41,11 @@ jobs:
     - name: Bootstrap
       run: make setup
 
-    - name: Swiflint
-      run: mint run swiftlint
+    - name: Danger
+      if: ${{ github.event_name == 'pull_request' }}
+      run: danger-swift ci
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build
       run: swift build -v
