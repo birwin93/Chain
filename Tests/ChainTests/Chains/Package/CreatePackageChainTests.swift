@@ -22,6 +22,8 @@ class CreatePackageChainTests: XCTestCase {
     func testChain() {
         chain.name = "test-package"
         chain.testRun(context: context)
-        context.testFile.assertContents("blah", at: "test-package/TestFile.swift")
+        context.testFile.assertContents("", at: "./test-package/Package.swift")
+        context.testFile.assertContents("", at: "./test-package/Sources/test-package/main.swift")
+        context.testFile.assertContents("wow", at: "./test-package/Blah.swift")
     }
 }
