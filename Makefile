@@ -2,11 +2,16 @@ ROOT = $(shell pwd)
 PRODUCT_NAME = $(shell basename $(ROOT))
 PROJECT_FILE = $(PRODUCT_NAME).xcodeproj
 
+define brew_install
+    brew list $(1) ||  brew install $(1) || true
+	brew link $(1)
+endef
+
 .PHONY: build clean
 
 setup:
-	brew list mint ||  brew install mint || true
-	brew link mint
+	brew_install mint
+	brew_install danger-swift
 	mint bootstrap
 
 build:
