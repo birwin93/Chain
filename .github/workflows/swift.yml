@@ -41,6 +41,9 @@ jobs:
     - name: Bootstrap
       run: make setup
 
+    - name: See Things
+      run: mint which swiftlint
+
     - name: Danger
       if: ${{ github.event_name == 'pull_request' }}
       run: danger-swift ci
