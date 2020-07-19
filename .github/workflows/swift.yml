@@ -34,8 +34,13 @@ jobs:
     - name: Bootstrap
       run: make setup
 
-    - name: Swiflint
-      run: mint run swiftlint
+    - name: Danger
+      uses: danger/swift@3.3.0
+      if: ${{ github.event_name == 'pull_request' }}
+      with:
+          args: --failOnErrors --no-publish-check
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build
       run: swift build -v
