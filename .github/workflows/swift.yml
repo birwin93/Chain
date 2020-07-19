@@ -14,10 +14,10 @@ jobs:
     steps:
     - name: Checkout 
       uses: actions/checkout@v2
-    - name: Swiftlint
-      uses: norio-nomura/action-swiftlint@3.1.0
-      env:
-          DIFF_BASE: ${{ github.base_ref }}
+    - name: Mint
+      run: mint bootstrap
+    - name: Swiflint
+      run: swiftlint
     - name: Build
       run: swift build -v
     - name: Run tests
