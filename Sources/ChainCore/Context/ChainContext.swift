@@ -8,9 +8,9 @@
 import Foundation
 
 public class ChainContext: Context {
-    
+
     public let file: File
-    
+
     public init(file: File = FileClient()) {
         self.file = file
     }

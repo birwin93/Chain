@@ -9,15 +9,15 @@
 import Foundation
 
 class TestContext: Context {
-    
+
     let testFile: TestFile
-    
+
     init(testFile: TestFile = TestFile()) {
         self.testFile = testFile
     }
-    
+
     // MARK: - Context
-    
+
     var file: File {
         return testFile
     }

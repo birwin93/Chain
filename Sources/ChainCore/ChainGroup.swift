@@ -9,12 +9,12 @@ import ArgumentParser
 import Foundation
 
 public protocol ChainGroup: Chain {
-    
+
     static var chains: [Chain.Type] { get }
 }
 
 extension ChainGroup {
-    
+
     public static var configuration: CommandConfiguration {
         return CommandConfiguration(
             commandName: name,
@@ -22,6 +22,6 @@ extension ChainGroup {
             subcommands: chains
         )
     }
-    
+
      public func run(context: Context) throws {}
 }

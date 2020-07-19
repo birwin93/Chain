@@ -1,0 +1,6 @@
+included:
+  - Sources
+  - Tests
+disabled_rules:
+  - todo
+opt_in_rules:
