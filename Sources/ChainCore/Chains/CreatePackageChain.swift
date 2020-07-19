@@ -17,7 +17,9 @@ public final class CreatePackageChain: Chain {
 
     public func run(context: Context) throws {
         try context.file.createDirectory(path: name)
-        try context.file.createFile(at: "\(name)/TestFile.swift", contents: "blah")
+        try context.shell.cd(name)
+        try context.shell.createSwiftPackage()
+        try context.file.createFile(at: "Blah.swift", contents: "wow")
     }
 
     public init() {}

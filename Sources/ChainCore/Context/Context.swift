@@ -9,4 +9,5 @@ import Foundation
 
 public protocol Context {
     var file: File { get }
+    var shell: Shell { get }
 }

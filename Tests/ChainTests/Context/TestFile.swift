@@ -10,25 +10,29 @@ import Foundation
 import XCTest
 
 class TestFile: File {
+    
+    let currentPath: CurrentPath
 
     var files: [String: String] = [:]
 
-    init() {}
+    init(currentPath: CurrentPath) {
+        self.currentPath = currentPath
+    }
 
     func fileExists(at path: String) -> Bool {
-        return files[path] != nil
+        return files[fullPath(path)] != nil
     }
 
     func fileContents(at path: String) throws -> String {
-        return files[path] ?? ""
+        return files[fullPath(path)] ?? ""
     }
 
     func createFile(at path: String, contents: String?) throws {
-        files[path] = contents ?? ""
+        files[fullPath(path)] = contents ?? ""
     }
 
     func write(_ contents: String, toFileAt path: String) throws {
-        files[path] = contents
+        files[fullPath(path)] = contents
     }
 
     func createDirectory(path: String) throws {
