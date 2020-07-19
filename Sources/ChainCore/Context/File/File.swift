@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol File {
-
+    
     // MARK: - File Management
 
     func fileExists(at path: String) -> Bool
@@ -27,36 +27,39 @@ public protocol File {
 // MARK: - FileClient
 
 public class FileClient: File {
-
+    
     private let fileManager: FileManager
+    private let currentPath: CurrentPath
 
-    public init(fileManager: FileManager = .default) {
+    public init(fileManager: FileManager = .default,
+                currentPath: CurrentPath) {
         self.fileManager = fileManager
+        self.currentPath = currentPath
     }
 
     public func fileExists(at path: String) -> Bool {
-        return fileManager.fileExists(atPath: path)
+        return fileManager.fileExists(atPath: fullPath(path))
     }
 
     public func fileContents(at path: String) throws -> String {
-        guard fileExists(at: path) else {
-            throw FileError.noFileFound(path: path)
+        guard fileExists(at: fullPath(path)) else {
+            throw FileError.noFileFound(path: fullPath(path))
         }
 
         guard let data = fileManager.contents(atPath: path) else {
-            throw FileError.failedToReadData(path: path)
+            throw FileError.failedToReadData(path: fullPath(path))
         }
 
         guard let contents = String(data: data, encoding: .utf8) else {
-            throw FileError.failedToDecodeData(path: path)
+            throw FileError.failedToDecodeData(path: fullPath(path))
         }
 
         return contents
     }
 
     public func createFile(at path: String, contents: String? = nil) throws {
-        guard !fileExists(at: path) else {
-            throw FileError.fileAlreadyExists(path: path)
+        guard !fileExists(at: fullPath(path)) else {
+            throw FileError.fileAlreadyExists(path: fullPath(path))
         }
 
         var contentData: Data?
@@ -68,33 +71,39 @@ public class FileClient: File {
         }
 
         fileManager.createFile(
-            atPath: path,
+            atPath: fullPath(path),
             contents: contentData,
             attributes: nil
         )
     }
 
     public func write(_ contents: String, toFileAt path: String) throws {
-        guard fileExists(at: path) else {
-            throw FileError.noFileFound(path: path)
+        guard fileExists(at: fullPath(path)) else {
+            throw FileError.noFileFound(path: fullPath(path))
         }
 
-        let url = URL(fileURLWithPath: path)
+        let url = URL(fileURLWithPath: fullPath(path))
         do {
             try contents.write(to: url, atomically: true, encoding: .utf8)
         } catch {
-            throw FileError.failedToWrite(path: path)
+            throw FileError.failedToWrite(path: fullPath(path))
         }
     }
 
     public func createDirectory(path: String) throws {
-        let url = URL(fileURLWithPath: path)
+        let url = URL(fileURLWithPath: fullPath(path))
 
         try fileManager.createDirectory(
             at: url,
             withIntermediateDirectories: true,
             attributes: nil
         )
+    }
+    
+    // MARK: - Path Helper
+    
+    private func fullPath(_ path: String) -> String {
+        return currentPath.url.appendingPathComponent(path).path
     }
 }
 
