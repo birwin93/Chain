@@ -4,3 +4,9 @@ included:
 disabled_rules:
   - todo
 opt_in_rules:
+  - force_cast
+  - force_try
+  - force_unwrapping
+custom_rules:
+  no_prints:
+    regex: "\\s+print\\("

@@ -16,6 +16,9 @@ public class ChainContext: Context {
 
     public init() {
         
+        let url = URL(string: "http://blah.com")!
+        print(url.path)
+        
         let shell = ShellClient()
         shell.currentPath = currentPath
         
