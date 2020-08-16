@@ -6,6 +6,7 @@
 //
 
 import ArgumentParser
+import ChainCore
 import Foundation
 
 public final class CreatePackageChain: Chain {
