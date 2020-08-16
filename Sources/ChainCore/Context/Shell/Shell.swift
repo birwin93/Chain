@@ -18,4 +18,8 @@ public protocol Shell {
     // MARK: - Swift
 
     func createSwiftPackage() throws
+
+    // MARK: - Mint
+
+    func mintBootstrap() throws
 }

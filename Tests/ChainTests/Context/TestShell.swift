@@ -37,4 +37,6 @@ class TestShell: Shell {
         try testFile.createFile(at: "Package.swift", contents: "")
         try testFile.createFile(at: "Sources/\(packageName)/main.swift", contents: "")
     }
+
+    func mintBootstrap() throws {}
 }

@@ -17,7 +17,7 @@ class TestContext: Context {
     let testShell: TestShell
 
     init() {
-        self.logger = Logger(label: "com.chain.test.logger")
+        self.logger = Logger()
         self.testFile = TestFile(currentPath: currentPath)
         self.testShell = TestShell(testFile: testFile, currentPath: currentPath, logger: logger)
     }
