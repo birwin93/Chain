@@ -23,6 +23,12 @@ setup:
 build:
 	swift build
 
+release: clean
+	swift build --disable-sandbox -c release
+
+install:
+	cp .build/release/Chain /usr/bin/chain
+
 clean:
 	rm -rf $(PROJECT_FILE)
 	rm -rf .build

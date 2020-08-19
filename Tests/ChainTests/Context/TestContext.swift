@@ -7,7 +7,6 @@
 
 import ChainCore
 import Foundation
-import Logging
 
 class TestContext: Context {
 

@@ -6,6 +6,7 @@
 //
 
 import ChainCore
+import Chains
 import Foundation
 import XCTest
 
@@ -20,6 +21,9 @@ class CreatePackageChainTests: XCTestCase {
     }
 
     func testChain() {
+        context.testShell.mockUserInput("y") // Makefile
+        context.testShell.mockUserInput("y") // Swiftlint
+
         chain.name = "test-package"
         chain.testRun(context: context)
         context.testFile.assertContents("", at: "./test-package/Package.swift")

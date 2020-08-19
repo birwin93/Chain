@@ -6,14 +6,14 @@
 //
 
 import Foundation
-import Logging
 
 public class ShellClient: Shell {
 
     let currentPath: CurrentPath
     let logger: Logger
 
-    public init(currentPath: CurrentPath, logger: Logger) {
+    public init(currentPath: CurrentPath,
+                logger: Logger) {
         self.currentPath = currentPath
         self.logger = logger
     }
@@ -35,24 +35,29 @@ public class ShellClient: Shell {
         logger.info("\(output)")
     }
 
-    // MARK: - Swift
+    // MARK: - Input
 
-    public func createSwiftPackage() throws {
-        let output = try shell("swift package init")
-        logger.info("\(output)")
+    public func getInput(prompt: String?) throws -> String? {
+        if let prompt = prompt {
+            print(prompt, terminator: "")
+        }
+
+        return readLine(strippingNewline: true)
     }
 
-    // MARK: - Mint
+    // MARK: - Execute
 
-    public func mintBootstrap() throws {
-        let output = try shell("mint bootstrap")
-        logger.info("\(output)")
+    @discardableResult
+    public func execute(_ command: ShellCommand) throws -> String {
+        return try shell(command.shellCommand)
     }
 
     // MARK: - Process
 
     @discardableResult
     func shell(_ command: String) throws -> String {
+        logger.debug(command)
+
         let pipe = Pipe()
         let errorPipe = Pipe()
 

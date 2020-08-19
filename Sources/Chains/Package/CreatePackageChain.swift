@@ -22,9 +22,15 @@ public final class CreatePackageChain: Chain {
         context.logger.step("Creating new swift package for \(name)")
         try context.file.createDirectory(path: name)
         try context.shell.cd(name)
-        try context.shell.createSwiftPackage()
-        try createMakefile(with: context)
-        try createMintFile(with: context)
+        try context.shell.execute(SwiftShellCommand.initPackage)
+
+        if try context.shell.getYesNoInput(prompt: "Do you want a Makefile?") {
+            try createMakefile(with: context)
+        }
+
+        if try context.shell.getYesNoInput(prompt: "Do you want Swiftlint?") {
+            try createMintFile(with: context)
+        }
     }
 
     private func createMakefile(with context: Context) throws {
@@ -77,6 +83,6 @@ public final class CreatePackageChain: Chain {
             """
         )
 
-        try context.shell.mintBootstrap()
+        try context.shell.execute(MintShellCommand.bootstrap)
     }
 }

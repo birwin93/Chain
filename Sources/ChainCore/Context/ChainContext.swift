@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import Logging
 
 public class ChainContext: Context {
 
