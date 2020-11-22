@@ -2,15 +2,6 @@
   "object": {
     "pins": [
       {
-        "package": "OhhAuth",
-        "repositoryURL": "https://github.com/mw99/OhhAuth.git",
-        "state": {
-          "branch": null,
-          "revision": "2b14d3c8087ea9a40b731cfa1bdb0f6f38509448",
-          "version": "1.1.0"
-        }
-      },
-      {
         "package": "Rainbow",
         "repositoryURL": "https://github.com/onevcat/Rainbow",
         "state": {

@@ -27,7 +27,7 @@ release: clean
 	swift build --disable-sandbox -c release
 
 install:
-	cp .build/release/Chain /usr/bin/chain
+	cp .build/release/OddsTracker /usr/bin/odds-tracker
 
 clean:
 	rm -rf $(PROJECT_FILE)
