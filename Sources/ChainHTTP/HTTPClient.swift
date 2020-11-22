@@ -278,8 +278,8 @@ extension Dictionary where Key == String, Value == URLQueryParamConvertable {
         var parts: [String] = []
         for (key, value) in self {
             let part = String(format: "%@=%@",
-                String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!,
-                String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!)
+                String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as NSString,
+                String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as NSString)
             parts.append(part as String)
         }
         return parts.joined(separator: "&")
