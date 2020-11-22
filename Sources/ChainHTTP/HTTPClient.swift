@@ -294,7 +294,7 @@ extension URL {
      @return A new URL.
     */
     func appendingQueryParameters(_ parametersDictionary : [String: URLQueryParamConvertable]) -> URL {
-        let URLString : String = String(format: "%@?%@", self.absoluteString, parametersDictionary.queryParameters)
+        let URLString : String = String(format: "%@?%@", self.absoluteString as NSString, parametersDictionary.queryParameters as NSString)
         return URL(string: URLString)!
     }
 }
