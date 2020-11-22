@@ -8,6 +8,7 @@
 import Foundation
 
 public protocol Context {
+    var env: Env { get }
     var file: File { get }
     var shell: Shell { get }
     var logger: Logger { get }

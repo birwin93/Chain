@@ -11,11 +11,13 @@ public class ChainContext: Context {
 
     var currentPath = CurrentPath()
 
+    public let env: Env
     public let file: File
     public let logger: Logger
     public let shell: Shell
 
     public init() {
+        self.env = EnvClient()
         self.logger = Logger()
         self.file = FileClient(currentPath: currentPath)
         self.shell = ShellClient(currentPath: currentPath, logger: logger)

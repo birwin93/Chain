@@ -89,9 +89,11 @@ public class FileClient: File {
     }
 
     public func write(_ contents: String, toFileAt path: String) throws {
-        guard fileExists(at: fullPath(path)) else {
-            throw FileError.noFileFound(path: fullPath(path))
+        if !fileExists(at: fullPath(path)) {
+            try createFile(at: path)
         }
+
+        print("Write to \(fullPath(path))")
 
         let url = URL(fileURLWithPath: fullPath(path))
         do {

@@ -64,7 +64,7 @@ public final class CreatePackageChain: Chain {
 
         xcode:
             swift package generate-xcodeproj
-            open $(PROJECT_FILE)%
+            open $(PROJECT_FILE)
         """
 
         try context.file.createFile(
