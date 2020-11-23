@@ -255,6 +255,7 @@ public class HTTPClient {
             return url.appendingQueryParameters(queryParams)
         }
     }
+    
 }
 
 public protocol URLQueryParamConvertable {
