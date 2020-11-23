@@ -255,7 +255,7 @@ public class HTTPClient {
             return url.appendingQueryParameters(queryParams)
         }
     }
-    
+
 }
 
 public protocol URLQueryParamConvertable {
@@ -278,10 +278,12 @@ extension Dictionary where Key == String, Value == URLQueryParamConvertable {
     var queryParameters: String {
         var parts: [String] = []
         for (key, value) in self {
-            let part = String(format: "%@=%@",
-                String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as NSString,
-                String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)! as NSString)
-            parts.append(part as String)
+            String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.withCString { keyStr in
+                String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.withCString { valueStr in
+                    let part = String(format: "%@=%@", keyStr, valueStr)
+                    parts.append(part as String)
+                }
+            }
         }
         return parts.joined(separator: "&")
     }
@@ -295,7 +297,10 @@ extension URL {
      @return A new URL.
     */
     func appendingQueryParameters(_ parametersDictionary : [String: URLQueryParamConvertable]) -> URL {
-        let URLString : String = String(format: "%@?%@", self.absoluteString as NSString, parametersDictionary.queryParameters as NSString)
-        return URL(string: URLString)!
+        return self.absoluteString.withCString { absStr in
+            return parametersDictionary.queryParameters.withCString { parStr in
+                return URL(string: String(format: "%@?%@", absStr, parStr))!
+            }
+        }
     }
 }
