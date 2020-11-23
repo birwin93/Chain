@@ -280,7 +280,7 @@ extension Dictionary where Key == String, Value == URLQueryParamConvertable {
         for (key, value) in self {
             String(describing: key).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.withCString { keyStr in
                 String(describing: value).addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!.withCString { valueStr in
-                    let part = String(format: "%@=%@", keyStr, valueStr)
+                    let part = String(format: "%s=%s", keyStr, valueStr)
                     parts.append(part as String)
                 }
             }
@@ -299,7 +299,7 @@ extension URL {
     func appendingQueryParameters(_ parametersDictionary : [String: URLQueryParamConvertable]) -> URL {
         return self.absoluteString.withCString { absStr in
             return parametersDictionary.queryParameters.withCString { parStr in
-                return URL(string: String(format: "%@?%@", absStr, parStr))!
+                return URL(string: String(format: "%s?%s", absStr, parStr))!
             }
         }
     }
